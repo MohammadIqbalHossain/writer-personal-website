@@ -110,11 +110,14 @@ const Login = () => {
     
     console.log(googleUser);
 
-    const location = useLocation();
+    // const location = useLocation();
     const navigate = useNavigate();
-    let from = location.state?.from?.pathname || "/";
-    if (user || googleUser) {
-        navigate(from, { replace: true });
+    // let from = location.state?.from?.pathname || "/";
+    // if (user || googleUser) {
+    //     navigate(from, { replace: true });
+    // }
+    if(user){
+        navigate("/");
     }
 
 

@@ -7,18 +7,23 @@ import Services from './components/Home/Services/Services';
 import Checkout from './components/Checkout/Checkout';
 import Login from './components/Auth/Login/Login';
 import SignUp from './components/Auth/SignUp/SignUp';
+import RequireAuth from './components/Auth/RequireAuth/RequireAuth';
 
 function App() {
   return (
     <div className="App">
       <Header />
-       <Routes>
-          <Route path='/' element={<Home />}></Route>
-          <Route path='/services' element={<Services />}></Route>
-          <Route path='/checkout' element={<Checkout />}></Route>
-          <Route path='/login' element={<Login />}></Route>
-          <Route path='/signup' element={<SignUp />}></Route>
-       </Routes>
+      <Routes>
+        <Route path='/' element={<Home />}></Route>
+        <Route path='/services' element={<Services />}></Route>
+        <Route path='/checkout' element={
+          <RequireAuth>
+            <Checkout />
+          </RequireAuth>
+        }></Route>
+        <Route path='/login' element={<Login />}></Route>
+        <Route path='/signup' element={<SignUp />}></Route>
+      </Routes>
     </div>
   );
 }
