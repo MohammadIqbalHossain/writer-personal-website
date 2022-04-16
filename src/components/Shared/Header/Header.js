@@ -13,7 +13,7 @@ const Header = () => {
             <div className="flex gap-4 items-center text-lg">
 
                 <NavLink to='/ '>Home</NavLink>
-                <NavLink to="/banner">
+                <NavLink  to="/services">
                     services
                 </NavLink>
                 <NavLink to='/login '>Login</NavLink>

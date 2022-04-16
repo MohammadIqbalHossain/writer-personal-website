@@ -1,9 +1,28 @@
-import React from 'react';
+import { data } from 'autoprefixer';
+import React, { useEffect, useState } from 'react';
+import DisplayServices from '../../DisplayServices/DisplayServices';
 
 const Services = () => {
+    const [blogs, setBlogs] = useState([]);
+
+    useEffect(() => {
+        fetch("data.json")
+            .then(res => res.json())
+            .then(data => setBlogs(data))
+    }, [])
     return (
-        <div>
-            <h1>This is services page.</h1>
+        <div >
+            <p id='services' className="my-10 text-2xl font-bold">My Blog writting topics</p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 m-10">
+                {
+                    blogs.map(blog => <DisplayServices
+                    key={blog._id}
+                    blogs={blog}
+                    ></DisplayServices>)
+                }
+            </div>
+
         </div>
     );
 };
