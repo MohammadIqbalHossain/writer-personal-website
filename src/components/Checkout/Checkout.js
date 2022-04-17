@@ -3,6 +3,9 @@ import { toast, ToastContainer } from 'react-toastify';
 
 const Checkout = () => {
     const handleOnSubmit =  (e) => {
+        const email = e.target.email.value;
+        console.log(email);
+
           e.preventDefault();
           toast("Thanks for Information,")
     }
