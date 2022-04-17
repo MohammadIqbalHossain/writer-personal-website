@@ -6,10 +6,10 @@ import bg from '../../images/login/bg.svg'
 import { FaUserAlt } from 'react-icons/fa';
 import { AiFillLock } from 'react-icons/ai';
 import auth from '../../../firebase.init';
-import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword, useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { BsGoogle } from 'react-icons/bs';
 import { BsGithub } from 'react-icons/bs';
 import Spinner from '../../Shared/Spinner/Spinner';
@@ -88,28 +88,40 @@ const Login = () => {
         toast("Check your mail");
     }
 
-    useEffect(() => {
-        switch (error?.code) {
-            case "auth/invalid-email":
-                toast("Invalid email")
-                break;
-            case "auth/user-not-found":
-                toast("Sign in first or reset password")
-                break;
-            default:
-                console.log("This is from login js line:99");
-                break;
-        }
+    
 
-    }, [error]);
-
-    const [signInWithGoogle, googleUser, googleLoading, googleError] = useSignInWithGoogle(auth);
+    const [signInWithGoogle,
+        googleUser,
+        googleLoading,
+        googleError] = useSignInWithGoogle(auth);
 
     // const handleContinueWithGoogle = () => {
     //     signInWithGoogle(userInfo.email) 
     // }
-    
-    console.log(googleUser);
+
+    const [signInWithGithub,
+        githubUser,
+        githubLoading,
+        GithubError] = useSignInWithGithub(auth);
+
+    console.log(googleUser || githubUser);
+
+    useEffect(() => {
+        if(error || googleError || GithubError){
+         switch (error?.code) {
+             case "auth/invalid-email":
+                 toast("Invalid email")
+                 break;
+             case "auth/user-not-found":
+                 toast("Sign in first or reset password")
+                 break;
+             default:
+                 toast("This is from login js line:100");
+                 break;
+         }
+        }
+ 
+     }, [error, googleError, GithubError]);
 
     // const location = useLocation();
     const navigate = useNavigate();
@@ -119,14 +131,14 @@ const Login = () => {
     // }
     const location = useLocation();
     let from = location.state?.from?.pathname || "/";
-    if(user || googleUser){
-        navigate(from, {from, replace: true});
+    if (user || googleUser) {
+        navigate(from, { from, replace: true });
     }
 
-    if(loading || googleLoading ||sending){
+    if (loading || googleLoading || githubLoading) {
         return <Spinner />
     }
-    
+
 
     return (
         <div className="mb-30">
@@ -168,7 +180,9 @@ const Login = () => {
                         </div>
                         {errors?.passwordError && <p className="text-red-500 text-xs">{errors.passwordError}</p>}
 
-                        <a href="#" onClick={handlePasswordReset}>Forgot Password?</a>
+                        <Link to="#" onClick={handlePasswordReset}>Forgot Password?</Link>
+                        <Link to="/signup">New to BlogZilla?</Link>
+
                         <input type="submit" class="login-btn" value="Login" />
 
                         <hr />
@@ -184,6 +198,7 @@ const Login = () => {
 
                         <div className="felx flex-col justify-center mr-auto">
                             <button
+                                onClick={() => signInWithGithub()}
                                 className="flex justify-center items-center border-2 border-green-100 mx-auto py-3 px-8  rounded-3xl hover:bg-green-400">
                                 <BsGithub className="mr-4" />
                                 Continue with Github

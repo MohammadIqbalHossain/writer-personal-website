@@ -9,7 +9,7 @@ import auth from '../../../firebase.init';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 
 const SignUp = () => {
@@ -38,7 +38,7 @@ const SignUp = () => {
         user,
         loading,
         error,
-    ] = useCreateUserWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
 
     // console.log(error);
     // console.log(user);
@@ -132,8 +132,10 @@ const SignUp = () => {
                                 <h5>Email</h5>
                                 <input
                                     onChange={handleEmail}
-                                    type="text"
-                                    className="input" />
+                                    type="email"
+                                    className="input"
+                                    required 
+                                    />
                             </div>
 
                         </div>
@@ -147,7 +149,9 @@ const SignUp = () => {
                                 <input
                                     onChange={handlePassword}
                                     type="password"
-                                    className="input" />
+                                    className="input"
+                                    required 
+                                    />
                             </div>
                         </div>
                         {errors?.passwordError && <p className="text-red-500 text-xs">{errors.passwordError}</p>}
@@ -161,17 +165,18 @@ const SignUp = () => {
                                 <input
                                     onChange={handleConfirmPassword}
                                     type="password"
-                                    className="input" />
+                                    className="input"
+                                    required 
+                                    />
+                                    
                             </div>
                         </div>
                         {errors.passwordError && <p className="text-red-500 text-xs">{errors.passwordError}</p>}
+                        <Link to='/login'>Login.</Link>
 
                         <input type="submit" className="login-btn" value="Sign Up" />
 
                         <hr />
-
-
-
                     </form>
                     <ToastContainer />
                 </div>
