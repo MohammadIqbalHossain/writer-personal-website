@@ -6,7 +6,7 @@ import bg from '../../images/login/bg.svg'
 import { FaUserAlt } from 'react-icons/fa';
 import { AiFillLock } from 'react-icons/ai';
 import auth from '../../../firebase.init';
-import { useCreateUserWithEmailAndPassword, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword} from 'react-firebase-hooks/auth';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -36,7 +36,7 @@ const SignUp = () => {
     const [
         createUserWithEmailAndPassword,
         user,
-        loading,
+        // loading,
         error,
       ] = useCreateUserWithEmailAndPassword(auth);
 
@@ -107,65 +107,66 @@ const SignUp = () => {
     // if(user){
     //     navigate(from, { replace: true });
     // }
+   
+
     if(user){
         navigate("/")
     }
 
     return (
         <div className="mb-30">
-            <img class="wave" src={wave} />
-            <div class="container">
-                <div class="img">
+            <img className="wave" src={wave} />
+            <div className="container">
+                <div className="img">
                     <img src={bg} />
                 </div>
-                <div class="login-content">
+                <div className="login-content">
                     <form onSubmit={handleOnSubmit}>
                         <img className="w-full mx-auto" src={avatar} />
-                        <h2 class="title">Welcome</h2>
-                        <div class="input-div one">
-                            <div class="i">
+                        <h2 className="title">Welcome</h2>
+                        <div className="input-div one">
+                            <div className="i">
                                 <FaUserAlt />
                             </div>
-                            <div class="div">
+                            <div className="div">
                                 <h5>Email</h5>
                                 <input
                                     onChange={handleEmail}
-                                    className="outline-none"
                                     type="text"
-                                    class="input" />
+                                    className="input" />
                             </div>
 
                         </div>
                         {errors?.emailError && <p className="text-red-500 text-xs">{errors.emailError}</p>}
-                        <div class="input-div pass">
-                            <div class="i">
+                        <div className="input-div pass">
+                            <div className="i">
                                 <AiFillLock />
                             </div>
-                            <div class="div">
+                            <div className="div">
                                 <h5>Password</h5>
                                 <input
                                     onChange={handlePassword}
-                                    className="outline-none" type="password"
-                                    class="input" />
+                                    type="password"
+                                    className="input" />
                             </div>
                         </div>
                         {errors?.passwordError && <p className="text-red-500 text-xs">{errors.passwordError}</p>}
 
-                        <div class="input-div pass">
-                            <div class="i">
+                        <div className="input-div pass">
+                            <div className="i">
                                 <AiFillLock />
                             </div>
-                            <div class="div">
+                            <div className="div">
                                 <h5>Confirm Password</h5>
                                 <input
                                     onChange={handleConfirmPassword}
-                                    className="outline-none" type="password"
-                                    class="input" />
+                                   type="password"
+                                    className="input" />
                             </div>
                         </div>
                         {errors.passwordError && <p className="text-red-500 text-xs">{errors.passwordError}</p>}
                         
-                        <input type="submit" class="login-btn" value="Sign Up" />
+                        <input type="submit" className="login-btn" value="Sign Up" />
                          
                          <hr />
 

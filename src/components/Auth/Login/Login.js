@@ -116,8 +116,10 @@ const Login = () => {
     // if (user || googleUser) {
     //     navigate(from, { replace: true });
     // }
-    if(user){
-        navigate("/");
+    const location = useLocation();
+    let from = location.state?.from?.pathname || "/";
+    if(user || googleUser){
+        navigate(from, {from, replace: true});
     }
 
 
