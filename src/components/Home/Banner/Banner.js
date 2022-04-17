@@ -10,12 +10,12 @@ const Banner = () => {
             <div className="md:w-[500px] m-5">
                 <h1 className="uppercase text-3xl md:text-5xl text-center md:text-left font-extrabold">A Guide to the Good Life: The Complete Manual</h1>
                 <p className="text-lg md:text-left mt-5 md:tracking-widest">
-                    One of the great fears we face is that despite our efforts, we will discover that we have wasted our life. This book gives you the tools to overcome your fears and reach your dreams
+                    One of the great fears we face is that despite our efforts, we will discover that we have wasted our life. I hope my writings gives you the tools to overcome your fears and reach your dreams
                 </p>
                 <button 
                 className="text-xl bg-white block mx-auto md:float-left py-4 px-9 mt-10 hover:bg-transparent hover:border-4
                 border-black rounded-full">
-                    Read & be Inspired
+                   Hire me, & get Inspired
                 </button>
             </div>
         </div>
