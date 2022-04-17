@@ -207,6 +207,9 @@ const Login = () => {
 
                         <hr />
 
+
+                    </form>
+                    <div>
                         <div className="felx flex-col justify-center mr-auto">
                             <button
                                 onClick={() => signInWithGoogle()}
@@ -224,7 +227,7 @@ const Login = () => {
                                 Continue with Github
                             </button>
                         </div>
-                    </form>
+                    </div>
                     <hr />
                     <ToastContainer />
                 </div>
