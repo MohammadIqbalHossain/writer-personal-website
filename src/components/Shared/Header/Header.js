@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import Logo from '../../images/book.webp'
 import auth from '../../../firebase.init'
-import {useAuthState} from 'react-firebase-hooks/auth'
+import { useAuthState } from 'react-firebase-hooks/auth'
 import { signOut } from 'firebase/auth';
 
 
@@ -26,14 +26,21 @@ const Header = () => {
             </div>
             <div className="flex gap-4 items-center text-lg">
 
-                <NavLink to='/ '>Home</NavLink>
-                <NavLink to="/services">
-                    services
+                <NavLink to='/' className={({ isActive }) => isActive ? "text-green-400 underline underline-offset-4" : ""} >
+                    Home
                 </NavLink>
-                {user ? <button onClick={userSignOut}>Sign out</button> :<NavLink to='/login '>Login</NavLink>}
 
-                <NavLink to='/blogs '>Blogs</NavLink>
-                <NavLink to='/about-me '>About me</NavLink>
+                {user ? <button onClick={userSignOut}>Sign out</button> : <NavLink to='/login' className={({ isActive }) => isActive ? "text-green-400 underline underline-offset-4" : ""}>
+                    Login
+                </NavLink>}
+
+                <NavLink to='/blogs' className={({ isActive }) => isActive ? "text-green-400 underline underline-offset-4" : ""}>
+                    Blogs
+                </NavLink>
+
+                <NavLink to='/about-me' className={({ isActive }) => isActive ? "text-green-400 underline underline-offset-4" : ""}>
+                    About me
+                </NavLink>
 
                 <NavLink className="bg-green-400 py-2 text-white px-4 rounded-xl" to='/signup'>Sign Up</NavLink>
 

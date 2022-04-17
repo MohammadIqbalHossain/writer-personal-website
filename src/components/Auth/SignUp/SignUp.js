@@ -14,7 +14,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
 
-    const [userInfo, setUserInfo] = useState({
+    const [userData, setUserData] = useState({
         email: "",
         password: "",
         confirmPassword: ""
@@ -23,7 +23,7 @@ const SignUp = () => {
     const [errors, setErrors] = useState({
         emailError: "",
         passwordError: "",
-        general: ""
+        randomErrors: ""
 
     })
 
@@ -38,7 +38,7 @@ const SignUp = () => {
         user,
         loading,
         error,
-    ] = useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
+    ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
 
     // console.log(error);
     // console.log(user);
@@ -49,11 +49,11 @@ const SignUp = () => {
         const validEmail = emailRegex.test(e.target.value);
 
         if (validEmail) {
-            setUserInfo({ ...userInfo, email: e.target.value })
+            setUserData({ ...userData, email: e.target.value })
             setErrors({ ...errors, emailError: "" })
         } else {
             setErrors({ ...errors, emailError: "Invalid email" })
-            setUserInfo({ ...userInfo, email: "" })
+            setUserData({ ...userData, email: "" })
         }
 
     }
@@ -64,28 +64,28 @@ const SignUp = () => {
         const passRegex = /.{6,}/;
         const validPassword = passRegex.test(e.target.value);
         if (validPassword) {
-            setUserInfo({ ...userInfo, password: e.target.value })
+            setUserData({ ...userData, password: e.target.value })
             setErrors({ ...errors, passwordError: "" })
         } else {
             setErrors({ ...errors, passwordError: "Password too short" })
-            setUserInfo({ ...userInfo, password: "" });
+            setUserData({ ...userData, password: "" });
         }
 
     }
 
     const handleConfirmPassword = e => {
-        if (e.target.value === userInfo.password) {
-            setUserInfo({ ...userInfo, confirmPassword: e.target.value })
+        if (e.target.value === userData.password) {
+            setUserData({ ...userData, confirmPassword: e.target.value })
             setErrors({ ...errors, passwordError: "" })
         } else {
             setErrors({ ...errors, passwordError: "Passord Mismatched" });
-            setUserInfo({ ...userInfo, confirmPassword: "" });
+            setUserData({ ...userData, confirmPassword: "" });
         }
     }
 
     const handleOnSubmit = e => {
         e.preventDefault();
-        createUserWithEmailAndPassword(userInfo.email, userInfo.password);
+        createUserWithEmailAndPassword(userData.email, userData.password);
     }
 
     useEffect(() => {
@@ -97,18 +97,13 @@ const SignUp = () => {
                 toast("Please sign in with just one account")
                 break;
             default:
-                toast("something is wrong");
+                break;
         }
     }, [error]);
 
-    // const location = useLocation();
+
+
     const navigate = useNavigate();
-    // let from = location.state?.from?.pathname || "/";
-    // if(user){
-    //     navigate(from, { replace: true });
-    // }
-
-
     if (user) {
         navigate("/")
     }
@@ -134,8 +129,8 @@ const SignUp = () => {
                                     onChange={handleEmail}
                                     type="email"
                                     className="input"
-                                    required 
-                                    />
+                                    required
+                                />
                             </div>
 
                         </div>
@@ -150,8 +145,8 @@ const SignUp = () => {
                                     onChange={handlePassword}
                                     type="password"
                                     className="input"
-                                    required 
-                                    />
+                                    required
+                                />
                             </div>
                         </div>
                         {errors?.passwordError && <p className="text-red-500 text-xs">{errors.passwordError}</p>}
@@ -166,9 +161,9 @@ const SignUp = () => {
                                     onChange={handleConfirmPassword}
                                     type="password"
                                     className="input"
-                                    required 
-                                    />
-                                    
+                                    required
+                                />
+
                             </div>
                         </div>
                         {errors.passwordError && <p className="text-red-500 text-xs">{errors.passwordError}</p>}

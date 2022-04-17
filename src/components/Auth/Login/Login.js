@@ -18,7 +18,7 @@ import Spinner from '../../Shared/Spinner/Spinner';
 
 const Login = () => {
 
-    const [userInfo, setUserInfo] = useState({
+    const [userData, setUserData] = useState({
         email: "",
         password: ""
     })
@@ -42,63 +42,74 @@ const Login = () => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+
     // console.log(error);
 
 
+    // code for handle email and setting user data to the state.
     const handleEmail = e => {
         const emailRegex = /\S+@\S+\.\S+/;
         const validEmail = emailRegex.test(e.target.value);
 
         if (validEmail) {
-            setUserInfo({ ...userInfo, email: e.target.value })
+            setUserData({ ...userData, email: e.target.value })
             setErrors({ ...errors, emailError: "" })
         } else {
             setErrors({ ...errors, emailError: "Invalid email" })
-            setUserInfo({ ...userInfo, email: "" })
+            setUserData({ ...userData, email: "" })
         }
 
     }
 
-    // console.log(userInfo);
+    // console.log(userData);
+    // console.log(errors)
 
+    // code for handle password and setting user data to the state.
     const handlePassword = e => {
         const passRegex = /.{6,}/;
         const validPassword = passRegex.test(e.target.value);
         console.log(validPassword);
         if (validPassword) {
-            setUserInfo({ ...userInfo, password: e.target.value })
+            setUserData({ ...userData, password: e.target.value })
             setErrors({ ...errors, passwordError: "" })
         } else {
             setErrors({ ...errors, passwordError: "Password too short" })
-            setUserInfo({ ...userInfo, password: "" });
+            setUserData({ ...userData, password: "" });
         }
 
     }
 
+
+    //function for submit the form.
     const handleOnSubmit = e => {
         e.preventDefault();
-        signInWithEmailAndPassword(userInfo.email, userInfo.password);
+        signInWithEmailAndPassword(userData.email, userData.password);
     }
 
 
     const [sendPasswordResetEmail, sending, ResetError] = useSendPasswordResetEmail(auth);
 
+
+    //Function for send user email reset.
     const handlePasswordReset = async () => {
-        await sendPasswordResetEmail(userInfo.email);
+        await sendPasswordResetEmail(userData.email);
         toast("Check your mail");
     }
 
-    
 
+    //sign in with google state.
     const [signInWithGoogle,
         googleUser,
         googleLoading,
         googleError] = useSignInWithGoogle(auth);
 
+
     // const handleContinueWithGoogle = () => {
     //     signInWithGoogle(userInfo.email) 
     // }
 
+
+    //sign in with github state.
     const [signInWithGithub,
         githubUser,
         githubLoading,
@@ -107,83 +118,92 @@ const Login = () => {
     console.log(googleUser || githubUser);
 
     useEffect(() => {
-        if(error || googleError || GithubError){
-         switch (error?.code) {
-             case "auth/invalid-email":
-                 toast("Invalid email")
-                 break;
-             case "auth/user-not-found":
-                 toast("Sign in first or reset password")
-                 break;
-             default:
-                 toast("This is from login js line:100");
-                 break;
-         }
+        switch (error?.code) {
+            case "auth/invalid-email":
+                toast("Invalid email")
+                break;
+            case "auth/user-not-found":
+                toast("Sign in first or reset password")
+                break;
+            case "auth/wrong-password":
+                toast("Please enter right password");
+                break;
+            default:
+                break;
         }
- 
-     }, [error, googleError, GithubError]);
 
-    // const location = useLocation();
-    const navigate = useNavigate();
+    }, [error, googleError, GithubError]);
+
+
+
     // let from = location.state?.from?.pathname || "/";
     // if (user || googleUser) {
     //     navigate(from, { replace: true });
     // }
+    const navigate = useNavigate();
     const location = useLocation();
     let from = location.state?.from?.pathname || "/";
     if (user || googleUser) {
         navigate(from, { from, replace: true });
     }
 
-    if (loading || googleLoading || githubLoading) {
-        return <Spinner />
-    }
+
+    // sorry, I can't used spiner becaue there is an error if I use spinner, my toast are not displaying because of spinner loads the page first, and functions cant't get data and spinners are also disappered. I don't know how to handle it.
+
+    // if (loading || googleLoading || githubLoading) {
+    //     return <Spinner />
+    // }
 
 
     return (
         <div className="mb-30">
-            <img class="wave" src={wave} />
-            <div class="container">
-                <div class="img">
+            <img className="wave" src={wave} />
+            <div className="container">
+                <div className="img">
                     <img src={bg} />
                 </div>
-                <div class="login-content">
+                <div className="login-content">
                     <form onSubmit={handleOnSubmit}>
                         <img className="w-full mx-auto" src={avatar} />
-                        <h2 class="title">Welcome</h2>
-                        <div class="input-div one">
-                            <div class="i">
+                        <h2 className="title">Welcome</h2>
+                        <div className="input-div one">
+                            <div className="i">
                                 <FaUserAlt />
                             </div>
-                            <div class="div">
+                            <div className="div">
                                 <h5>Email</h5>
                                 <input
                                     onChange={handleEmail}
-                                    className="outline-none"
                                     type="text"
-                                    class="input" />
+                                    className="input outline-none"
+                                    required
+                                />
+
                             </div>
 
                         </div>
                         {errors?.emailError && <p className="text-red-500 text-xs">{errors.emailError}</p>}
-                        <div class="input-div pass">
-                            <div class="i">
+                        <div className="input-div pass">
+                            <div className="i">
                                 <AiFillLock />
                             </div>
-                            <div class="div">
+                            <div className="div">
                                 <h5>Password</h5>
                                 <input
                                     onChange={handlePassword}
-                                    className="outline-none" type="password"
-                                    class="input" />
+                                    className="outline-none input"
+                                    type="password"
+                                    required
+
+                                />
                             </div>
                         </div>
                         {errors?.passwordError && <p className="text-red-500 text-xs">{errors.passwordError}</p>}
 
                         <Link to="#" onClick={handlePasswordReset}>Forgot Password?</Link>
-                        <Link to="/signup">New to BlogZilla?</Link>
+                        <Link to="/signup">New in here?</Link>
 
-                        <input type="submit" class="login-btn" value="Login" />
+                        <input type="submit" className="login-btn" value="Login" />
 
                         <hr />
 
