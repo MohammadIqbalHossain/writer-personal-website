@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { BsGoogle } from 'react-icons/bs';
 import { BsGithub } from 'react-icons/bs';
+import Spinner from '../../Shared/Spinner/Spinner';
 
 
 
@@ -122,7 +123,9 @@ const Login = () => {
         navigate(from, {from, replace: true});
     }
 
-
+    if(loading || googleLoading ||sending){
+        return <Spinner />
+    }
     
 
     return (

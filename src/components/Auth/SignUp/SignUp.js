@@ -6,7 +6,7 @@ import bg from '../../images/login/bg.svg'
 import { FaUserAlt } from 'react-icons/fa';
 import { AiFillLock } from 'react-icons/ai';
 import auth from '../../../firebase.init';
-import { useCreateUserWithEmailAndPassword} from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -17,7 +17,7 @@ const SignUp = () => {
     const [userInfo, setUserInfo] = useState({
         email: "",
         password: "",
-        confirmPassword: "" 
+        confirmPassword: ""
     })
 
     const [errors, setErrors] = useState({
@@ -36,9 +36,9 @@ const SignUp = () => {
     const [
         createUserWithEmailAndPassword,
         user,
-        // loading,
+        loading,
         error,
-      ] = useCreateUserWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth);
 
     // console.log(error);
     // console.log(user);
@@ -74,12 +74,12 @@ const SignUp = () => {
     }
 
     const handleConfirmPassword = e => {
-        if(e.target.value === userInfo.password){
-            setUserInfo({...userInfo, confirmPassword: e.target.value})
-            setErrors({...errors, passwordError: ""})
-        }else{
-            setErrors({...errors, passwordError: "Passord Mismatched"});
-            setUserInfo({...userInfo, confirmPassword: ""});
+        if (e.target.value === userInfo.password) {
+            setUserInfo({ ...userInfo, confirmPassword: e.target.value })
+            setErrors({ ...errors, passwordError: "" })
+        } else {
+            setErrors({ ...errors, passwordError: "Passord Mismatched" });
+            setUserInfo({ ...userInfo, confirmPassword: "" });
         }
     }
 
@@ -107,9 +107,9 @@ const SignUp = () => {
     // if(user){
     //     navigate(from, { replace: true });
     // }
-   
 
-    if(user){
+
+    if (user) {
         navigate("/")
     }
 
@@ -160,17 +160,17 @@ const SignUp = () => {
                                 <h5>Confirm Password</h5>
                                 <input
                                     onChange={handleConfirmPassword}
-                                   type="password"
+                                    type="password"
                                     className="input" />
                             </div>
                         </div>
                         {errors.passwordError && <p className="text-red-500 text-xs">{errors.passwordError}</p>}
-                        
-                        <input type="submit" className="login-btn" value="Sign Up" />
-                         
-                         <hr />
 
-                        
+                        <input type="submit" className="login-btn" value="Sign Up" />
+
+                        <hr />
+
+
 
                     </form>
                     <ToastContainer />
