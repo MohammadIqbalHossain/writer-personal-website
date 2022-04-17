@@ -1,12 +1,13 @@
 import React from 'react';
-import Footer from '../../Shared/Footer/Footer';
 import Banner from '../Banner/Banner';
 import Services from '../Services/Services';
+import ServicesTopics from '../ServicesTopics/ServicesTopics';
 
 const Home = () => {
     return (
         <div>
             <Banner />
+            <ServicesTopics />
             <Services />
         </div>
     );
