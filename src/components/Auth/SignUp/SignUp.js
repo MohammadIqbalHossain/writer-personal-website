@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import './Login.css';
 import avatar from '../../images/login/avatar.svg'
 import wave from "../../images/login/wave.png"
 import bg from '../../images/login/bg.svg'
@@ -9,7 +8,7 @@ import auth from '../../../firebase.init';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const SignUp = () => {
