@@ -21,7 +21,7 @@ const DisplayServices = ({ blogs }) => {
                     <p className="text-left mb-5">Support me to continue: {price}</p>
                     
                     <button className="btn btn-accent block mx-auto">
-                        <Link className="text-center" to="/checkout">
+                        <Link className="text-center text-white" to="/checkout">
                             Checkout
                         </Link>
                     </button>
