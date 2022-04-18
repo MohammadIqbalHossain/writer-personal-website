@@ -3,6 +3,8 @@
 
  [Live site link](https://writer-personal-site.web.app/);
 
+ ![Live site image]('/src/components/images/assignment-10.png')
+
 # Features 
 - ### home page have bannner, a topics page about my writing. 
 
