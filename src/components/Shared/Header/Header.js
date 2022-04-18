@@ -19,6 +19,7 @@ const Header = () => {
             // An error happened.
         });
     }
+    
     return (
         <div className="flex justify-center md:justify-between items-center p-5 md:px-20">
             <div className="hidden md:block">
@@ -39,14 +40,11 @@ const Header = () => {
                 </NavLink>
 
                 <NavLink to='/about-me' className={({ isActive }) => isActive ? "text-green-400 underline underline-offset-4" : ""}>
-                    About me
+                    About
                 </NavLink>
 
                 <NavLink className="bg-green-400 py-2 text-white px-4 rounded-xl" to='/signup'>Sign Up</NavLink>
-
-
             </div>
-
         </div>
     );
 };

@@ -12,15 +12,15 @@ const DisplayServices = ({ blogs }) => {
                 <div className="flex flex-col justify-between p-4 leading-normal">
                     <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white text-left">{name}</h5>
                    
-                    <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 text-left">{des}
-                        <button
+                    <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 text-left">{des.slice(0, 200) + "..."}
+                        <button 
                             className="btn btn-link">
                             Read more..
                         </button>
                     </p>
                     <p className="text-left mb-5">Support me to continue: {price}</p>
                     
-                    <button className="btn btn-accent block md:mx-auto ">
+                    <button className="btn btn-accent block mx-auto">
                         <Link className="text-center" to="/checkout">
                             Checkout
                         </Link>
@@ -33,4 +33,4 @@ const DisplayServices = ({ blogs }) => {
     );
 };
 
-export default DisplayServices; <h1>Display services</h1>
+export default DisplayServices; 
