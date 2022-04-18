@@ -6,10 +6,11 @@ import { HiDocumentReport } from 'react-icons/hi'
 const ServicesTopics = () => {
     return (
         <div>
-            <div className='flex justify-center items-center'>
-                <div style={{ height: "5px" }} className='w-50 bg-green-200'></div>
-                <p className='mt-10 mx-10 text-4xl font-extrabold'>My writing Topics.</p>
-                <div style={{ height: "5px" }} className='w-50 bg-green-200'></div>
+
+            <div className="mt-10">
+                <div className="w-[600px] mx-auto h-2 bg-[#60ECB6] my-3"></div>
+                <p className="text-2xl text-center font-bold">My Writing Topics</p>
+                <div className="w-[600px] mx-auto h-2 bg-[#60ECB6] my-3"></div>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mt-10 bg-gray-100">
